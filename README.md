@@ -1,1 +1,1 @@
-# minemeld-ansible-edit
+# What is needed for minemeld setup
