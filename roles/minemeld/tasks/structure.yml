@@ -1,0 +1,45 @@
+# create user
+- name: minemeld user
+  user:
+    name: minemeld
+    group: minemeld
+    home: "{{data_directory}}"
+    createhome: no
+    shell: "/usr/sbin/nologin"
+
+# create directoy layout
+- name: main directory
+  file: state=directory path="{{main_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: local directory
+  file: state=directory path="{{local_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: data directory
+  file: state=directory path="{{data_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: config directory
+  file: state=directory path="{{config_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: traced config directory
+  file: state=directory path="{{traced_config_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: API config directory
+  file: state=directory path="{{api_config_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: trace directory
+  file: state=directory path="{{trace_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: library directory
+  file: state=directory path="{{library_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: certs directory
+  file: state=directory path="{{certs_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: local certs directory
+  file: state=directory path="{{local_ca_directory}}" owner=minemeld group="minemeld" mode=0775
+- name: prototypes local directory
+  file: state=directory path="{{ prototypes_local_directory }}" owner=minemeld group="minemeld" mode=0775
+- name: supervisor config directory
+  file: state=directory path="{{ supervisor_directory }}/config/conf.d" owner=minemeld group="minemeld" mode=0775
+- name: log directory
+  file: state=directory path="{{ main_directory }}/log" owner=minemeld group="minemeld" mode=0775
+- name: PID directory
+  file: state=directory path="/var/run/minemeld" owner=minemeld group="minemeld" mode=0775
+- name: www directory
+  file: state=directory path="{{www_directory}}" owner=minemeld group="minemeld" mode=0775
+
+# install required dev packages
+- name: install packages
+  package: name={{item}} state=present
+  with_items: "{{structure_packages}}"
