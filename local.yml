@@ -1,5 +1,5 @@
 - name: minemeld playbook
-  hosts: 127.0.0.1
+  hosts: 152.2.20.145
   connection: local
   become: true
 
